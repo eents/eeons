@@ -36,7 +36,7 @@ function draw() {
     let object = objects[i];
 
     // Move the object
-    moveObject(object, 3);
+    moveObject(object, 111);
 
     // Apply the texture to the object
     texture(textureImages[i]);
