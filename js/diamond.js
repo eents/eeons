@@ -1,8 +1,44 @@
 function setup() {
     createCanvas(200, 300, WEBGL);
   }
+
+  function moveObject(object, speed) {
+    // Get the object's current position
+    let xPos = object.x;
+    let yPos = object.y;
   
-  function draw() {
+    // Initialize the direction variables if they don't exist
+    if (typeof object.xDir === "undefined") object.xDir = 1;
+    if (typeof object.yDir === "undefined") object.yDir = 1;
+  
+    // Determine the new position based on the current direction
+    xPos += object.xDir * speed;
+    yPos += object.yDir * speed;
+  
+    // Check if the object is at one of the edges of the canvas
+    let canvasWidth = canvas.offsetWidth;
+    let canvasHeight = canvas.offsetHeight;
+    if (xPos < 0 || xPos + object.offsetWidth > canvasWidth || yPos < 0 || yPos + object.offsetHeight > canvasHeight) {
+      // If it is, choose a new random direction
+      object.xDir = (Math.random() - 0.5) * 2;
+      object.yDir = (Math.random() - 0.5) * 2;
+  
+      // Make sure the object stays inside the boundaries of the canvas
+      xPos = xPos < 0 ? 0 : xPos;
+      xPos = xPos + object.offsetWidth > canvasWidth ? canvasWidth - object.offsetWidth : xPos;
+      yPos = yPos < 0 ? 0 : yPos;
+      yPos = yPos + object.offsetHeight > canvasHeight ? canvasHeight - object.offsetHeight : yPos;
+    }
+  
+    // Update the object's position
+    object.x = xPos;
+    object.y = yPos;
+    push();
+    translate(xPos, yPos);
+    pop();
+  }
+
+  function draw(object) {
     
     rotateY(frameCount * 0.03);
     
@@ -102,4 +138,6 @@ function setup() {
     vertex(-60, 0, -60);
     s16.fill(22, 57, 31);
     endShape(CLOSE);
+
+    moveObject(object, 5);
   }

@@ -25,8 +25,14 @@ function moveObject(object) {
       if (x >= maxX || x <= 0) {
         direction *= -1;
       }
+      if (x <= maxX || x >= 0) {
+        direction *= 1;
+      }
       if (y >= maxY || y <= 0) {
         direction *= -1;
+      }
+      if (x <= maxY || y >= 0) {
+        direction *= 1;
       }
   
       // Update the object's position on the screen
@@ -35,6 +41,6 @@ function moveObject(object) {
     }, 10);
   }
 
-  let myObject = document.getElementById("my-object");
+  let myObject = document.getElementById("diamond-ctr");
   moveObject(myObject);
   
