@@ -4,6 +4,9 @@ let circles = [];
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
+  // Define an array of colors
+  let colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
+
   // Create circles
   for (let i = 0; i < numCircles; i++) {
     circles.push({
@@ -12,13 +15,15 @@ function setup() {
       speed: random(.11, 1.11),
       directionX: random(-1, 1),
       directionY: random(-1, 1),
-      radius: random(33, 66)
+      radius: random(33, 66),
+      color: colors[Math.floor(Math.random() * colors.length)]  // Assign a random color from the colors array
     });
   }
 }
 
 function draw() {
-  background(0);
+  // Use the frameCount variable to vary the hue value of the background color
+  background((frameCount % 300), 0, 0); // set the background color to a hue value between 0 and 359, with maximum saturation and brightness
 
   // Update and draw circles
   for (let i = 0; i < numCircles; i++) {
@@ -50,7 +55,7 @@ function draw() {
     }
 
     // Draw circle
-    fill(255, 0, 0);
-    ellipse(circle.x, circle.y, circle.radius * 2, circle.radius * 2);
+fill(circle.color);
+ellipse(circle.x, circle.y, circle.radius * 2, circle.radius * 2);
   }
 }
