@@ -5,21 +5,10 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
   
     // Define an array of colors
-    let colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
+    let colors = [[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0], [0, 255, 255], [255, 0, 255]];
   
     // Create custom circles
-    let customCircles = [
-      {
-        name: 'custom-cir-1',
-        x: 100,
-        y: 100,
-        speed: 1,
-        directionX: 1,
-        directionY: 1,
-        radius: 50,
-        color: '#000000'
-      }
-    ];
+    let customCircles = [      {        name: 'custom-cir-1',        x: 100,        y: 100,        speed: 1,        directionX: 1,        directionY: 1,        radius: 50,        color: '#000000'      }    ];
   
     // Create randomly generated circles
     for (let i = 0; i < numCircles; i++) {
@@ -36,17 +25,33 @@ function setup() {
   
     // Add custom circles to the circles array
     circles.push(...customCircles);
+}
+
+
+function hideCircles() {
+    let circle = circles.shift();
+    if (circle) {
+      circle.radius = 1;
+      circle.color = [0, 0, 0, 0];
+      draw();
+    } else {
+      clearInterval(intervalId);
+    }
   }
 
-  function windowResized() {
-    // Reload the page when the window is resized
-    location.reload();
-  }
+function windowResized() {
+  // Reload the page when the window is resized
+  location.reload();
+}
 
-  function draw() {
-    clear();
+function mousePressed() {
+    let intervalId = setInterval(hideCircles, 99);
+}
 
-    // Update and draw circles
+function draw() {
+  clear();
+
+  // Update and draw circles
   for (let i = 0; i < circles.length; i++) {
     let circle = circles[i];
 
@@ -79,6 +84,5 @@ function setup() {
     // Draw circle
     fill(circle.color);
     ellipse(circle.x, circle.y, circle.radius * 2, circle.radius * 2);
-  }
-
 }
+}   
