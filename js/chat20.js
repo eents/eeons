@@ -1,4 +1,4 @@
-let numCircles = 24;
+let numCircles = 21;
 let circles = [];
 
 function setup() {
@@ -34,7 +34,7 @@ function setup() {
   customCir1.style.width = '100px';
   customCir1.style.height = '100px';
   customCir1.style.borderRadius = '50%';
-  customCir1.style.backgroundColor = '#550000';
+  customCir1.style.backgroundColor = '#000000';
   customCir1.style.position = 'absolute';
   customCir1.style.top = '100px';
   customCir1.style.left = '100px';
@@ -51,21 +51,9 @@ function hideCircles() {
     circle.color = [0, 0, 0, 0];
     draw();
   } else {
-    clearInterval(intervalId);
-  }
-  if (circles.length === 0) {
+    $("#text-ctr").fadeIn(2500);
     document.getElementById('text-ctr').style.display = 'flex';
-    var opacity_icr = .10;
-  // Use setInterval to repeatedly set the opacity at a fixed interval of 10 milliseconds
-  var intervalId = setInterval(function() {
-    if (opacity_icr < 1) {
-      opacity_icr += .01;
-      document.getElementById('text-ctr').style.opacity = opacity_icr;
-    } else {
-      document.getElementById('text-ctr').style.opacity = 1;
-      clearInterval(intervalId);
-    }
-  }, 10);
+    clearInterval(intervalId);
   }
 }
 

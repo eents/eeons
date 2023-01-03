@@ -44,6 +44,10 @@ function setup() {
   customCircles[0].element = customCir1;
 }
 
+let targetOpacity = 1;
+let currentOpacity = 0;
+let opacityIntervalId;
+
 function hideCircles() {
   let circle = circles.shift();
   if (circle) {
@@ -55,17 +59,14 @@ function hideCircles() {
   }
   if (circles.length === 0) {
     document.getElementById('text-ctr').style.display = 'flex';
-    var opacity_icr = .10;
-  // Use setInterval to repeatedly set the opacity at a fixed interval of 10 milliseconds
-  var intervalId = setInterval(function() {
-    if (opacity_icr < 1) {
-      opacity_icr += .01;
-      document.getElementById('text-ctr').style.opacity = opacity_icr;
+    document.getElementById('text-ctr').style.opacity = currentOpacity;
+    if (currentOpacity < targetOpacity) {
+      currentOpacity += 0.1;
+      opacityIntervalId = setTimeout(hideCircles, 100);
     } else {
-      document.getElementById('text-ctr').style.opacity = 1;
-      clearInterval(intervalId);
+      clearTimeout(opacityIntervalId);
+    //   $("#text-ctr").fadeIn(3000);
     }
-  }, 10);
   }
 }
 

@@ -44,30 +44,34 @@ function setup() {
   customCircles[0].element = customCir1;
 }
 
+let displayText = false;
+let opacity_icr = 0;
+
 function hideCircles() {
-  let circle = circles.shift();
-  if (circle) {
-    circle.radius = 1;
-    circle.color = [0, 0, 0, 0];
-    draw();
-  } else {
-    clearInterval(intervalId);
-  }
-  if (circles.length === 0) {
-    document.getElementById('text-ctr').style.display = 'flex';
-    var opacity_icr = .10;
-  // Use setInterval to repeatedly set the opacity at a fixed interval of 10 milliseconds
-  var intervalId = setInterval(function() {
-    if (opacity_icr < 1) {
-      opacity_icr += .01;
-      document.getElementById('text-ctr').style.opacity = opacity_icr;
+    let circle = circles.shift();
+    if (circle) {
+      circle.radius = 1;
+      circle.color = [0, 0, 0, 0];
+      draw();
     } else {
-      document.getElementById('text-ctr').style.opacity = 1;
       clearInterval(intervalId);
     }
-  }, 10);
-  }
+    if (circles.length === 0) {
+      displayText = true;
+    }
 }
+
+var intervalId = setInterval(function() {
+    if (displayText) {
+      document.getElementById('text-ctr').style.display = 'flex';
+      if (opacity_icr < 1) {
+        opacity_icr += .01;
+        document.getElementById('text-ctr').style.opacity = opacity_icr;
+      } else {
+        clearInterval(intervalId);
+      }
+    }
+  }, 10);
 
 function windowResized() {
   // Reload the page when the window is resized

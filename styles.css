@@ -13,21 +13,17 @@ html {
 body {
     background-color: black;
     color: white;
-}   
-
-@keyframes diamond-anim {
-    from {background-color: blue;}
-    to {background-color: red;}
 }
 
-#diamond-ctr {
+#text-ctr {
+    display: none;
+    outline: 3px dotted white;
     position: absolute;
-    width: 100px;
-    height: 100px;
-    background-color: blue;
-    animation-name: diamond-anim;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-
+    margin-left: 12.25vw;
+    margin-top: 17vh;
+    width: 75vw;
+    height: 66vh;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
 }
